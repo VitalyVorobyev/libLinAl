@@ -28,7 +28,10 @@ class LVect {
     Vect BoostVec(void) const;
     LVect& Boost(const Vect& bv);
 
-    void t(const double& a) {m_t = a; return;}
+    void t(const double& a) {m_t = a;}
+    void x(const double& a) {m_vec.x(a);}
+    void y(const double& a) {m_vec.y(a);}
+    void z(const double& a) {m_vec.z(a);}
 
     double x(void)     const;
     double y(void)     const;

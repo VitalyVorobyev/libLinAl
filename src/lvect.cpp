@@ -13,12 +13,12 @@
 #include <cmath>
 #include <limits>
 
+namespace linal {
+
 using std::sqrt;
 using std::fabs;
 using std::cout;
 using std::endl;
-
-namespace linal {
 
 LVect::LVect() : m_t(0), m_vec() {}
 LVect::LVect(const double& d, const double& a,

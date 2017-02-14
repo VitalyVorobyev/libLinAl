@@ -13,12 +13,12 @@
 #include <cmath>
 #include <limits>
 
+namespace linal {
+
 using std::sqrt;
 using std::fabs;
 using std::cout;
 using std::endl;
-
-namespace linal {
 
 Vect::Vect(const double& a, const double& b, const double& c) :
     m_x(a), m_y(b), m_z(c) {}
