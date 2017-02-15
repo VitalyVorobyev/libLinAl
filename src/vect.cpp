@@ -33,13 +33,18 @@ double Vect::r(void)     const {return sqrt(r2());}
 double Vect::cosTh(void) const {return m_z/r();}
 double Vect::pt(void)    const {return sqrt(m_x*m_x+m_y*m_y);}
 
+Vect& Vect::operator=(const Vect& vec) {
+    m_x = vec.m_x; m_y = vec.m_y; m_z = vec.m_z;
+    return *this;
+}
+
 Vect& Vect::operator+=(const Vect& vec) {
-    m_x += vec.x(); m_y += vec.y(); m_z += vec.z();
+    m_x += vec.m_x; m_y += vec.m_y; m_z += vec.m_z;
     return *this;
 }
 
 Vect& Vect::operator-=(const Vect& vec) {
-    m_x -= vec.x(); m_y -= vec.y(); m_z -= vec.z();
+    m_x -= vec.m_x; m_y -= vec.m_y; m_z -= vec.m_z;
     return *this;
 }
 

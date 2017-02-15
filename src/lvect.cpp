@@ -53,6 +53,11 @@ double LVect::beta(void)  const {return BoostVec().r();}
 double LVect::beta2(void) const {return BoostVec().r2();}
 double LVect::gamma(void) const {return 1./sqrt(1-BoostVec().r2());}
 
+LVect& LVect::operator=(const LVect& vec) {
+    m_t = vec.m_t; m_vec = vec.m_vec;
+    return *this;
+}
+
 LVect& LVect::operator+=(const LVect& vec) {
     m_t += vec.m_t; m_vec += vec.m_vec;
     return *this;
