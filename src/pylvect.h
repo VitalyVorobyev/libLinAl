@@ -37,7 +37,6 @@ std::string reprLVect(const LVect& v) {
 typedef double (LVect::*LVGet)() const;
 typedef void (LVect::*LVSet)(const double&);
 
-// BOOST_PYTHON_MODULE(lvect) {
 void wrapLVect() { class_<LVect>("lvect", init<>())
             .def(init<const double&, const double&,
                       const double&, const double&>(

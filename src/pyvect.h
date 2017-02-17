@@ -34,7 +34,6 @@ std::string reprVect(const Vect& v) {
 typedef double (Vect::*VGet)() const;
 typedef void (Vect::*VSet)(const double&);
 
-//BOOST_PYTHON_MODULE(liblinal) {
 void wrapVect() { class_<Vect>("vect", init<>())
             .def(init<const double&, const double&, const double&>(
                      args("x", "y", "z")))
