@@ -43,9 +43,15 @@ Vect Vect::unit(void) const {
     return *this / this->r();
 }
 
-Vect& Vect::operator=(const Vect& vec) {
-    m_x = vec.m_x; m_y = vec.m_y; m_z = vec.m_z;
-    return *this;
+bool Vect::operator==(const Vect& vec) {
+    if (fabs(m_x - vec.m_x) > std::numeric_limits<double>::min()) return false;
+    if (fabs(m_y - vec.m_y) > std::numeric_limits<double>::min()) return false;
+    if (fabs(m_z - vec.m_z) > std::numeric_limits<double>::min()) return false;
+    return true;
+}
+
+bool Vect::operator!=(const Vect& vec) {
+    return !(*this == vec);
 }
 
 Vect& Vect::operator+=(const Vect& vec) {
