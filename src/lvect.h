@@ -37,6 +37,7 @@ class LVect {
     double y(void)     const;
     double z(void)     const;
     double t(void)     const;
+
     double m2(void)    const;
     double m(void)     const;
     double beta(void)  const;
@@ -54,13 +55,16 @@ class LVect {
     LVect& operator*(const double& a) const;
     LVect& operator/(const double& a) const;
 
-    friend double dot(const LVect& lv1, const LVect& lv2);
+    static double dot(const LVect& lv1, const LVect& lv2);
+
     friend std::ostream& operator<<(std::ostream& os, const LVect& v);
 
  private:
     double m_t;
     Vect m_vec;
 };
+
+std::ostream& operator<<(std::ostream& os, const LVect& v);
 
 }  // namespace linal
 

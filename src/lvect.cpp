@@ -32,14 +32,14 @@ Vect LVect::BoostVec(void) const {
 LVect& LVect::Boost(const Vect& bv) {
   const double bt2 = bv.r2();
   const double gm = 1./sqrt(1.-bt2);
-  const double bt = gm*(m_t - dot(bv, m_vec));
+  const double bt = gm*(m_t - Vect::dot(bv, m_vec));
   const double bx = x() - gm*bv.z()*m_t +
           (gm-1)*bv.x()*(bv.x()*x() + bv.y()*y()+bv.z()*z())/bt2;
   const double by = y() - gm*bv.y()*m_t +
           (gm-1)*bv.y()*(bv.y()*y() + bv.x()*x()+bv.z()*z())/bt2;
   const double bz = z() - gm*bv.z()*m_t +
           (gm-1)*bv.z()*(bv.z()*z() + bv.x()*x()+bv.y()*y())/bt2;
-  m_t = bt; m_vec.x(bx); m_vec.y(by); m_vec.z(bz);
+  *this = LVect(bt, bx, by, bz);
   return *this;
 }
 
@@ -105,8 +105,8 @@ LVect& LVect::operator/(const double& a) const {
     return *nlv /= a;
 }
 
-double dot(const LVect& lv1, const LVect& lv2) {
-    return lv1.m_t*lv2.m_t - dot(lv1.m_vec, lv2.m_vec);
+double LVect::dot(const LVect& lv1, const LVect& lv2) {
+    return lv1.m_t*lv2.m_t - Vect::dot(lv1.m_vec, lv2.m_vec);
 }
 
 std::ostream& operator<<(std::ostream& os, const LVect& v) {

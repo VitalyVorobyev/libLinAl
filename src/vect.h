@@ -46,12 +46,15 @@ class Vect {
     Vect& operator*(const double& a) const;
     Vect& operator/(const double& a) const;
 
-    friend double dot(const Vect& v1, const Vect& v2);
+    static double dot(const Vect& v1, const Vect& v2);
+
     friend std::ostream& operator<<(std::ostream& os, const Vect& v);
 
  protected:
     double m_x, m_y, m_z;
 };
+
+std::ostream& operator<<(std::ostream& os, const Vect& v);
 
 }  // namespace linal
 

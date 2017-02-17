@@ -86,7 +86,7 @@ Vect& Vect::operator/(const double& a) const {
     return *nvec /= a;
 }
 
-double dot(const Vect& v1, const Vect& v2) {
+double Vect::dot(const Vect& v1, const Vect& v2) {
     return v1.m_x * v2.m_x + v1.m_y * v2.m_y + v1.m_z * v2.m_z;
 }
 
