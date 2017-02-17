@@ -18,7 +18,7 @@ namespace linal {
 using std::sqrt;
 using std::fabs;
 using std::pow;
-using std::cout;
+using std::cerr;
 using std::endl;
 
 LVect::LVect() : m_t(0), m_vec() {}
@@ -32,6 +32,10 @@ Vect LVect::BoostVec(void) const {
 
 LVect& LVect::Boost(const Vect& bv) {
   const double bbeta = bv.r();
+  if (bbeta >= 1) {
+      cerr << "LVect::Boost: space-like vector boost!" << endl;
+      return *this;
+  }
   const double bgamma = 1./sqrt(1.-pow(bbeta, 2));
   const Vect bdirect = bv / bbeta;
   const double dotnr = Vect::dot(m_vec, bdirect);
@@ -93,7 +97,7 @@ LVect& operator*(const double& a, LVect& vec) {
 
 LVect& LVect::operator/=(const double& a) {
     if (fabs(a) < std::numeric_limits<double>::min()) {
-        cout << "LorentzVector divided by zero!" << endl;
+        cerr << "LorentzVector divided by zero!" << endl;
         return *this;
     }
     m_t /= a; m_vec /= a;
