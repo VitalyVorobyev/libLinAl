@@ -44,7 +44,10 @@ class LVect {
     double beta2(void) const;
     double gamma(void) const;
 
-    LVect& operator=(const LVect& vec);
+    // Static methods //
+    static double dot(const LVect& lv1, const LVect& lv2);
+
+    // Operators overloading //
     LVect& operator+=(const LVect& vec);
     LVect& operator-=(const LVect& vec);
     LVect& operator+(const LVect& vec) const;
@@ -53,9 +56,8 @@ class LVect {
     LVect& operator*=(const double& a);
     LVect& operator/=(const double& a);
     LVect& operator*(const double& a) const;
+    friend LVect& operator*(const double& a, LVect& vec);
     LVect& operator/(const double& a) const;
-
-    static double dot(const LVect& lv1, const LVect& lv2);
 
     friend std::ostream& operator<<(std::ostream& os, const LVect& v);
 
@@ -65,6 +67,7 @@ class LVect {
 };
 
 std::ostream& operator<<(std::ostream& os, const LVect& v);
+LVect& operator*(const double& a, LVect& vec);
 
 }  // namespace linal
 

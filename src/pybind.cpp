@@ -8,6 +8,8 @@
  **
  **/
 
+#include <boost/python.hpp>
+
 #include "./pyvect.h"
 #include "./pylvect.h"
 

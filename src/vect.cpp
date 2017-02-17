@@ -12,13 +12,14 @@
 
 #include <cmath>
 #include <limits>
+#include <iostream>
 
 namespace linal {
 
 using std::sqrt;
 using std::fabs;
-using std::cout;
 using std::endl;
+using std::cerr;
 
 Vect::Vect(const double& a, const double& b, const double& c) :
     m_x(a), m_y(b), m_z(c) {}
@@ -32,6 +33,15 @@ double Vect::r2(void)    const {return m_x*m_x+m_y*m_y+m_z*m_z;}
 double Vect::r(void)     const {return sqrt(r2());}
 double Vect::cosTh(void) const {return m_z/r();}
 double Vect::pt(void)    const {return sqrt(m_x*m_x+m_y*m_y);}
+
+Vect Vect::unit(void) const {
+    const double len = this->r();
+    if (len < std::numeric_limits<double>::min()) {
+        cerr << "Vect::unit for zero vect" << endl;
+        return *this;
+    }
+    return *this / this->r();
+}
 
 Vect& Vect::operator=(const Vect& vec) {
     m_x = vec.m_x; m_y = vec.m_y; m_z = vec.m_z;
@@ -69,7 +79,7 @@ Vect& Vect::operator*=(const double& a) {
 
 Vect& Vect::operator/=(const double& a) {
     if (fabs(a) < std::numeric_limits<double>::min()) {
-        cout << "ThreeVector divided by zero!" << endl;
+        cerr << "Vect divided by zero!" << endl;
         return *this;
     }
     m_x /= a; m_y /= a; m_z /= a;
@@ -79,6 +89,10 @@ Vect& Vect::operator/=(const double& a) {
 Vect& Vect::operator*(const double& a) const {
     auto* nvec = new Vect(*this);
     return *nvec *= a;
+}
+
+Vect& operator*(const double& a, const Vect& vec) {
+    return vec*a;
 }
 
 Vect& Vect::operator/(const double& a) const {

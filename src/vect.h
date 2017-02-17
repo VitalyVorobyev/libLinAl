@@ -35,6 +35,10 @@ class Vect {
     double cosTh(void) const;
     double pt(void)    const;
 
+    Vect unit(void) const;
+
+    static double dot(const Vect& v1, const Vect& v2);
+
     Vect& operator=(const Vect& vec);
     Vect& operator+=(const Vect& vec);
     Vect& operator-=(const Vect& vec);
@@ -46,8 +50,7 @@ class Vect {
     Vect& operator*(const double& a) const;
     Vect& operator/(const double& a) const;
 
-    static double dot(const Vect& v1, const Vect& v2);
-
+    friend Vect& operator*(const double& a, const Vect& vec);
     friend std::ostream& operator<<(std::ostream& os, const Vect& v);
 
  protected:
@@ -55,6 +58,7 @@ class Vect {
 };
 
 std::ostream& operator<<(std::ostream& os, const Vect& v);
+Vect& operator*(const double& a, const Vect& vec);
 
 }  // namespace linal
 
