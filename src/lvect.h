@@ -48,11 +48,13 @@ class LVect {
     static double dot(const LVect& lv1, const LVect& lv2);
 
     // Operators overloading //
+    bool operator==(const LVect& vec) const;
+    bool operator!=(const LVect& vec) const;
     LVect& operator+=(const LVect& vec);
     LVect& operator-=(const LVect& vec);
     LVect& operator+(const LVect& vec) const;
     LVect& operator-(const LVect& vec) const;
-    LVect operator-(void);
+    LVect operator-(void) const;
     LVect& operator*=(const double& a);
     LVect& operator/=(const double& a);
     LVect& operator*(const double& a) const;

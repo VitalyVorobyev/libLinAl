@@ -37,7 +37,7 @@ LVect& LVect::Boost(const Vect& bv) {
       return *this;
   }
   const double bgamma = 1./sqrt(1.-pow(bbeta, 2));
-  const Vect bdirect = bv / bbeta;
+  const Vect bdirect = -bv / bbeta;
   const double dotnr = Vect::dot(m_vec, bdirect);
   *this = LVect(bgamma * (m_t - bbeta * dotnr),
                 m_vec + ((bgamma-1.)*dotnr - bgamma*m_t*bbeta) * bdirect);
@@ -62,6 +62,18 @@ double LVect::beta(void)  const {return BoostVec().r();}
 double LVect::beta2(void) const {return BoostVec().r2();}
 double LVect::gamma(void) const {return 1./sqrt(1-BoostVec().r2());}
 
+bool LVect::operator==(const LVect& vec) const {
+    if (fabs(m_t - vec.m_t) > std::numeric_limits<double>::min()) return false;
+    if (fabs(x() - vec.x()) > std::numeric_limits<double>::min()) return false;
+    if (fabs(y() - vec.y()) > std::numeric_limits<double>::min()) return false;
+    if (fabs(z() - vec.z()) > std::numeric_limits<double>::min()) return false;
+    return true;
+}
+
+bool LVect::operator!=(const LVect& vec) const {
+    return !(*this == vec);
+}
+
 LVect& LVect::operator+=(const LVect& vec) {
     m_t += vec.m_t; m_vec += vec.m_vec;
     return *this;
@@ -82,7 +94,7 @@ LVect& LVect::operator-(const LVect& vec) const {
     return *nlv -= vec;
 }
 
-LVect LVect::operator-(void) {
+LVect LVect::operator-(void) const {
     return LVect(-m_t, -m_vec);
 }
 

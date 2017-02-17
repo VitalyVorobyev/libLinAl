@@ -39,13 +39,13 @@ class Vect {
 
     static double dot(const Vect& v1, const Vect& v2);
 
-    bool operator==(const Vect& vec);
-    bool operator!=(const Vect& vec);
+    bool operator==(const Vect& vec) const;
+    bool operator!=(const Vect& vec) const;
     Vect& operator+=(const Vect& vec);
     Vect& operator-=(const Vect& vec);
     Vect& operator+(const Vect& vec) const;
     Vect& operator-(const Vect& vec) const;
-    Vect  operator-(void);
+    Vect  operator-(void) const;
     Vect& operator*=(const double& a);
     Vect& operator/=(const double& a);
     Vect& operator*(const double& a) const;
