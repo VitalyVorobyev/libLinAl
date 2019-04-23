@@ -21,11 +21,11 @@ namespace linal {
 class Vect {
  public:
     Vect(void);
-    Vect(const double& a, const double& b, const double& c);
+    Vect(double a, double b, double c);
 
-    void x(const double& a) {m_x = a;}
-    void y(const double& a) {m_y = a;}
-    void z(const double& a) {m_z = a;}
+    void x(double a) {m_x = a;}
+    void y(double a) {m_y = a;}
+    void z(double a) {m_z = a;}
 
     double x(void)     const;
     double y(void)     const;
@@ -46,12 +46,12 @@ class Vect {
     Vect& operator+(const Vect& vec) const;
     Vect& operator-(const Vect& vec) const;
     Vect  operator-(void) const;
-    Vect& operator*=(const double& a);
-    Vect& operator/=(const double& a);
-    Vect& operator*(const double& a) const;
-    Vect& operator/(const double& a) const;
+    Vect& operator*=(double a);
+    Vect& operator/=(double a);
+    Vect& operator*(double a) const;
+    Vect& operator/(double a) const;
 
-    friend Vect& operator*(const double& a, const Vect& vec);
+    friend Vect& operator*(double a, const Vect& vec);
     friend std::ostream& operator<<(std::ostream& os, const Vect& v);
 
  protected:
@@ -59,7 +59,7 @@ class Vect {
 };
 
 std::ostream& operator<<(std::ostream& os, const Vect& v);
-Vect& operator*(const double& a, const Vect& vec);
+Vect& operator*(double a, const Vect& vec);
 
 }  // namespace linal
 

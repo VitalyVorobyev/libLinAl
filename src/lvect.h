@@ -11,7 +11,7 @@
 #ifndef _HOME_VITALY_MYLIBS_LIBLINAL_SRC_LVECT_H_
 #define _HOME_VITALY_MYLIBS_LIBLINAL_SRC_LVECT_H_
 
-#include "./vect.h"
+#include "vect.h"
 
 namespace linal {
 
@@ -21,17 +21,17 @@ namespace linal {
 class LVect {
  public:
     LVect();
-    LVect(const double& d, const double& a, const double& b, const double& c);
-    LVect(const double& a, const Vect& vec);
+    LVect(double d, double a, double b, double c);
+    LVect(double a, const Vect& vec);
 
     Vect Vec(void) const {return m_vec;}
     Vect BoostVec(void) const;
     LVect& Boost(const Vect& bv);
 
-    void t(const double& a) {m_t = a;}
-    void x(const double& a) {m_vec.x(a);}
-    void y(const double& a) {m_vec.y(a);}
-    void z(const double& a) {m_vec.z(a);}
+    void t(double a) {m_t = a;}
+    void x(double a) {m_vec.x(a);}
+    void y(double a) {m_vec.y(a);}
+    void z(double a) {m_vec.z(a);}
 
     double x(void)     const;
     double y(void)     const;
@@ -55,11 +55,11 @@ class LVect {
     LVect& operator+(const LVect& vec) const;
     LVect& operator-(const LVect& vec) const;
     LVect operator-(void) const;
-    LVect& operator*=(const double& a);
-    LVect& operator/=(const double& a);
-    LVect& operator*(const double& a) const;
-    friend LVect& operator*(const double& a, LVect& vec);
-    LVect& operator/(const double& a) const;
+    LVect& operator*=(double a);
+    LVect& operator/=(double a);
+    LVect& operator*(double a) const;
+    friend LVect& operator*(double a, LVect& vec);
+    LVect& operator/(double a) const;
 
     friend std::ostream& operator<<(std::ostream& os, const LVect& v);
 
@@ -69,7 +69,7 @@ class LVect {
 };
 
 std::ostream& operator<<(std::ostream& os, const LVect& v);
-LVect& operator*(const double& a, LVect& vec);
+LVect& operator*(double a, LVect& vec);
 
 }  // namespace linal
 

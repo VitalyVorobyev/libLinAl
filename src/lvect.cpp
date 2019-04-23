@@ -8,7 +8,7 @@
  **
  **/
 
-#include "/home/vitaly/MyLibs/libLinAl/src/lvect.h"
+#include "lvect.h"
 
 #include <cmath>
 #include <limits>
@@ -22,25 +22,24 @@ using std::cerr;
 using std::endl;
 
 LVect::LVect() : m_t(0), m_vec() {}
-LVect::LVect(const double& d, const double& a,
-             const double& b, const double& c) : m_t(d), m_vec(a, b, c) {}
-LVect::LVect(const double& a, const Vect& vec): m_t(a), m_vec(vec) {}
+LVect::LVect(double d, double a, double b, double c) : m_t(d), m_vec(a, b, c) {}
+LVect::LVect(double a, const Vect& vec): m_t(a), m_vec(vec) {}
 
 Vect LVect::BoostVec(void) const {
-    return m_vec/m_t;
+    return m_vec / m_t;
 }
 
 LVect& LVect::Boost(const Vect& bv) {
-  const double bbeta = bv.r();
-  if (bbeta >= 1) {
-      cerr << "LVect::Boost: space-like vector boost!" << endl;
-      return *this;
-  }
-  const double bgamma = 1./sqrt(1.-pow(bbeta, 2));
-  const Vect bdirect = -bv / bbeta;
-  const double dotnr = Vect::dot(m_vec, bdirect);
-  *this = LVect(bgamma * (m_t - bbeta * dotnr),
-                m_vec + ((bgamma-1.)*dotnr - bgamma*m_t*bbeta) * bdirect);
+    const double bbeta = bv.r();
+    if (bbeta >= 1) {
+        cerr << "LVect::Boost: space-like vector boost!" << endl;
+        return *this;
+    }
+    const double bgamma = 1./sqrt(1.-pow(bbeta, 2));
+    const Vect bdirect = -bv / bbeta;
+    const double dotnr = Vect::dot(m_vec, bdirect);
+    *this = LVect(bgamma * (m_t - bbeta * dotnr), 
+                  m_vec + ((bgamma-1.)*dotnr - bgamma*m_t*bbeta) * bdirect);
 //  const double bt = gm*(m_t - Vect::dot(bv, m_vec));
 //  const double bx = x() - gm*bv.z()*m_t +
 //          (gm-1)*bv.x()*(bv.x()*x() + bv.y()*y()+bv.z()*z())/bt2;
@@ -98,16 +97,16 @@ LVect LVect::operator-(void) const {
     return LVect(-m_t, -m_vec);
 }
 
-LVect& LVect::operator*=(const double& a) {
+LVect& LVect::operator*=(double a) {
     m_t *= a; m_vec *= a;
     return *this;
 }
 
-LVect& operator*(const double& a, LVect& vec) {
+LVect& operator*(double a, LVect& vec) {
     return vec*a;
 }
 
-LVect& LVect::operator/=(const double& a) {
+LVect& LVect::operator/=(double a) {
     if (fabs(a) < std::numeric_limits<double>::min()) {
         cerr << "LorentzVector divided by zero!" << endl;
         return *this;
@@ -116,12 +115,12 @@ LVect& LVect::operator/=(const double& a) {
     return *this;
 }
 
-LVect& LVect::operator*(const double& a) const {
+LVect& LVect::operator*(double a) const {
     auto* nlv = new LVect(*this);
     return *nlv *= a;
 }
 
-LVect& LVect::operator/(const double& a) const {
+LVect& LVect::operator/(double a) const {
     auto* nlv = new LVect(*this);
     return *nlv /= a;
 }

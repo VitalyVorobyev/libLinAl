@@ -8,14 +8,14 @@
  **
  **/
 
-#include "../src/pyvect.h"
+#include "pyvect.h"
 
 #include <string>
 #include <sstream>
 #include <iostream>
 
 #include <boost/python.hpp>
-#include "./vect.h"
+#include "vect.h"
 
 using boost::python::class_;
 using boost::python::self;

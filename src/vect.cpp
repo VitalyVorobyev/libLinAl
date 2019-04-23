@@ -8,7 +8,7 @@
  **
  **/
 
-#include "/home/vitaly/MyLibs/libLinAl/src/vect.h"
+#include "vect.h"
 
 #include <cmath>
 #include <limits>
@@ -21,9 +21,7 @@ using std::fabs;
 using std::endl;
 using std::cerr;
 
-Vect::Vect(const double& a, const double& b, const double& c) :
-    m_x(a), m_y(b), m_z(c) {}
-
+Vect::Vect(double a, double b, double c) : m_x(a), m_y(b), m_z(c) {}
 Vect::Vect() : Vect(0, 0, 0) {}
 
 double Vect::x(void)     const {return m_x;}
@@ -78,12 +76,12 @@ Vect Vect::operator-(void) const {
     return Vect(-m_x, -m_y, -m_z);
 }
 
-Vect& Vect::operator*=(const double& a) {
+Vect& Vect::operator*=(double a) {
     m_x *= a; m_y *= a; m_z *= a;
     return *this;
 }
 
-Vect& Vect::operator/=(const double& a) {
+Vect& Vect::operator/=(double a) {
     if (fabs(a) < std::numeric_limits<double>::min()) {
         cerr << "Vect divided by zero!" << endl;
         return *this;
@@ -92,16 +90,16 @@ Vect& Vect::operator/=(const double& a) {
     return *this;
 }
 
-Vect& Vect::operator*(const double& a) const {
+Vect& Vect::operator*(double a) const {
     auto* nvec = new Vect(*this);
     return *nvec *= a;
 }
 
-Vect& operator*(const double& a, const Vect& vec) {
+Vect& operator*(double a, const Vect& vec) {
     return vec*a;
 }
 
-Vect& Vect::operator/(const double& a) const {
+Vect& Vect::operator/(double a) const {
     auto* nvec = new Vect(*this);
     return *nvec /= a;
 }
