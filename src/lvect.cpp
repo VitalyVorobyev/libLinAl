@@ -21,9 +21,24 @@ using std::pow;
 using std::cerr;
 using std::endl;
 
-LVect::LVect() : m_t(0), m_vec() {}
-LVect::LVect(double d, double a, double b, double c) : m_t(d), m_vec(a, b, c) {}
-LVect::LVect(double a, const Vect& vec): m_t(a), m_vec(vec) {}
+LVect::LVect() : m_t(0), m_vec(), m_idMap {
+        {0, [&](){return this->t();}},
+        {1, [&](){return this->x();}},
+        {2, [&](){return this->y();}},
+        {3, [&](){return this->z();}}
+    } {}
+LVect::LVect(double d, double a, double b, double c) : m_t(d), m_vec(a, b, c), m_idMap {
+        {0, [&](){return this->t();}},
+        {1, [&](){return this->x();}},
+        {2, [&](){return this->y();}},
+        {3, [&](){return this->z();}}
+    } {}
+LVect::LVect(double a, const Vect& vec): m_t(a), m_vec(vec), m_idMap {
+        {0, [&](){return this->t();}},
+        {1, [&](){return this->x();}},
+        {2, [&](){return this->y();}},
+        {3, [&](){return this->z();}}
+    } {}
 
 Vect LVect::BoostVec(void) const {
     return m_vec / m_t;
@@ -125,7 +140,11 @@ LVect& LVect::operator/(double a) const {
     return *nlv /= a;
 }
 
-double LVect::dot(const LVect& lv1, const LVect& lv2) {
+double LVect::at(int i) const {
+    return m_idMap.find(i)->second();
+}
+
+double dot(const LVect& lv1, const LVect& lv2) {
     return lv1.m_t*lv2.m_t - Vect::dot(lv1.m_vec, lv2.m_vec);
 }
 

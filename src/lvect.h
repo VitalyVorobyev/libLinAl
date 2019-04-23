@@ -13,13 +13,19 @@
 
 #include "vect.h"
 
+#include <map>
+#include <functional>
+
 namespace linal {
 
 ///
 /// \brief The LVect class
 ///
 class LVect {
+    std::map<int, std::function<double()>> m_idMap;
+
  public:
+
     LVect();
     LVect(double d, double a, double b, double c);
     LVect(double a, const Vect& vec);
@@ -33,19 +39,20 @@ class LVect {
     void y(double a) {m_vec.y(a);}
     void z(double a) {m_vec.z(a);}
 
+    double t(void)     const;
     double x(void)     const;
     double y(void)     const;
     double z(void)     const;
-    double t(void)     const;
 
     double m2(void)    const;
     double m(void)     const;
     double beta(void)  const;
     double beta2(void) const;
     double gamma(void) const;
+    double at(int i) const;
 
     // Static methods //
-    static double dot(const LVect& lv1, const LVect& lv2);
+    friend double dot(const LVect& lv1, const LVect& lv2);
 
     // Operators overloading //
     bool operator==(const LVect& vec) const;
@@ -58,6 +65,7 @@ class LVect {
     LVect& operator*=(double a);
     LVect& operator/=(double a);
     LVect& operator*(double a) const;
+    // double& operator[](int i);
     friend LVect& operator*(double a, LVect& vec);
     LVect& operator/(double a) const;
 
@@ -70,6 +78,7 @@ class LVect {
 
 std::ostream& operator<<(std::ostream& os, const LVect& v);
 LVect& operator*(double a, LVect& vec);
+double dot(const LVect& lv1, const LVect& lv2);
 
 }  // namespace linal
 
