@@ -52,7 +52,7 @@ LVect& LVect::Boost(const Vect& bv) {
     }
     const double bgamma = 1./sqrt(1.-pow(bbeta, 2));
     const Vect bdirect = -bv / bbeta;
-    const double dotnr = Vect::dot(m_vec, bdirect);
+    const double dotnr = dot(m_vec, bdirect);
     *this = LVect(bgamma * (m_t - bbeta * dotnr), 
                   m_vec + ((bgamma-1.)*dotnr - bgamma*m_t*bbeta) * bdirect);
 //  const double bt = gm*(m_t - Vect::dot(bv, m_vec));
@@ -98,14 +98,12 @@ LVect& LVect::operator-=(const LVect& vec) {
     return *this;
 }
 
-LVect& LVect::operator+(const LVect& vec) const {
-    auto* nlv = new LVect(*this);
-    return *nlv += vec;
+LVect LVect::operator+(const LVect& vec) const {
+    return LVect(*this) += vec;
 }
 
-LVect& LVect::operator-(const LVect& vec) const {
-    auto* nlv = new LVect(*this);
-    return *nlv -= vec;
+LVect LVect::operator-(const LVect& vec) const {
+    return LVect(*this) -= vec;
 }
 
 LVect LVect::operator-(void) const {
@@ -117,7 +115,7 @@ LVect& LVect::operator*=(double a) {
     return *this;
 }
 
-LVect& operator*(double a, LVect& vec) {
+LVect operator*(double a, LVect& vec) {
     return vec*a;
 }
 
@@ -130,14 +128,12 @@ LVect& LVect::operator/=(double a) {
     return *this;
 }
 
-LVect& LVect::operator*(double a) const {
-    auto* nlv = new LVect(*this);
-    return *nlv *= a;
+LVect LVect::operator*(double a) const {
+    return LVect(*this) *= a;
 }
 
-LVect& LVect::operator/(double a) const {
-    auto* nlv = new LVect(*this);
-    return *nlv /= a;
+LVect LVect::operator/(double a) const {
+    return LVect(*this) /= a;
 }
 
 double LVect::at(int i) const {
@@ -145,7 +141,7 @@ double LVect::at(int i) const {
 }
 
 double dot(const LVect& lv1, const LVect& lv2) {
-    return lv1.m_t*lv2.m_t - Vect::dot(lv1.m_vec, lv2.m_vec);
+    return lv1.m_t*lv2.m_t - dot(lv1.m_vec, lv2.m_vec);
 }
 
 std::ostream& operator<<(std::ostream& os, const LVect& v) {

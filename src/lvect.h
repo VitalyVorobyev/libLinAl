@@ -59,15 +59,15 @@ class LVect {
     bool operator!=(const LVect& vec) const;
     LVect& operator+=(const LVect& vec);
     LVect& operator-=(const LVect& vec);
-    LVect& operator+(const LVect& vec) const;
-    LVect& operator-(const LVect& vec) const;
+    LVect operator+(const LVect& vec) const;
+    LVect operator-(const LVect& vec) const;
     LVect operator-(void) const;
     LVect& operator*=(double a);
     LVect& operator/=(double a);
-    LVect& operator*(double a) const;
+    LVect operator*(double a) const;
     // double& operator[](int i);
-    friend LVect& operator*(double a, LVect& vec);
-    LVect& operator/(double a) const;
+    friend LVect operator*(double a, LVect& vec);
+    LVect operator/(double a) const;
 
     friend std::ostream& operator<<(std::ostream& os, const LVect& v);
 
@@ -77,7 +77,7 @@ class LVect {
 };
 
 std::ostream& operator<<(std::ostream& os, const LVect& v);
-LVect& operator*(double a, LVect& vec);
+LVect operator*(double a, LVect& vec);
 double dot(const LVect& lv1, const LVect& lv2);
 
 }  // namespace linal

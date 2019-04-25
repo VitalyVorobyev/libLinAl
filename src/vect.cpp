@@ -62,14 +62,12 @@ Vect& Vect::operator-=(const Vect& vec) {
     return *this;
 }
 
-Vect& Vect::operator+(const Vect& vec) const {
-    auto nvec = new Vect(*this);
-    return *nvec += vec;
+Vect Vect::operator+(const Vect& vec) const {
+    return Vect(*this) += vec;
 }
 
-Vect& Vect::operator-(const Vect& vec) const {
-    auto* nvec = new Vect(*this);
-    return *nvec -= vec;
+Vect Vect::operator-(const Vect& vec) const {
+    return Vect(*this) -= vec;
 }
 
 Vect Vect::operator-(void) const {
@@ -90,21 +88,19 @@ Vect& Vect::operator/=(double a) {
     return *this;
 }
 
-Vect& Vect::operator*(double a) const {
-    auto* nvec = new Vect(*this);
-    return *nvec *= a;
+Vect Vect::operator*(double a) const {
+    return Vect(*this) *= a;
 }
 
-Vect& operator*(double a, const Vect& vec) {
+Vect operator*(double a, const Vect& vec) {
     return vec*a;
 }
 
-Vect& Vect::operator/(double a) const {
-    auto* nvec = new Vect(*this);
-    return *nvec /= a;
+Vect Vect::operator/(double a) const {
+    return Vect(*this) /= a;
 }
 
-double Vect::dot(const Vect& v1, const Vect& v2) {
+double dot(const Vect& v1, const Vect& v2) {
     return v1.m_x * v2.m_x + v1.m_y * v2.m_y + v1.m_z * v2.m_z;
 }
 
