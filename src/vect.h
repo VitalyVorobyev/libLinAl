@@ -49,6 +49,7 @@ class Vect {
     Vect operator*(double a) const;
     Vect operator/(double a) const;
 
+    friend Vect cross(const Vect& v1, const Vect& v2);
     friend double dot(const Vect& v1, const Vect& v2);
     friend Vect operator*(double a, const Vect& vec);
     friend std::ostream& operator<<(std::ostream& os, const Vect& v);
@@ -60,6 +61,7 @@ class Vect {
 std::ostream& operator<<(std::ostream& os, const Vect& v);
 Vect operator*(double a, const Vect& vec);
 double dot(const Vect& v1, const Vect& v2);
+Vect cross(const Vect& v1, const Vect& v2);
 
 }  // namespace linal
 

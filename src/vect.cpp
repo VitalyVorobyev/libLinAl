@@ -104,6 +104,14 @@ double dot(const Vect& v1, const Vect& v2) {
     return v1.m_x * v2.m_x + v1.m_y * v2.m_y + v1.m_z * v2.m_z;
 }
 
+Vect cross(const Vect& v1, const Vect& v2) {
+    return Vect(
+        v1.m_y * v2.m_z - v1.m_z * v2.m_y,
+        v1.m_z * v2.m_x - v1.m_x * v2.m_z,
+        v1.m_x * v2.m_y - v1.m_y * v2.m_x
+    );
+}
+
 std::ostream& operator<<(std::ostream& os, const Vect& v) {
     os << "(" << v.m_x << ", " << v.m_y << ", " << v.m_z << ")";
     return os;
